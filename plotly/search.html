@@ -1,0 +1,66 @@
+<html>
+<head>
+<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.5.1/lodash.min.js"></script>
+</head>
+<body>
+<div id="bwSearchWidget" style="heidght:300px"></div>
+<script type="text/javascript" src="js/bw-plotly-widgets.js"></script>
+<script type="text/javascript">
+function plotSearchWidget() {
+
+    var query = {
+        word: "Lincoln"
+    };
+    var timeSeriesOptions = {
+        // Element to draw the chart in
+        div: "bwSearchWidget",
+        // Layout options for Plotly
+        layout: {
+              title: "'"+query.word+"' in the HathiTrust Digital Library",
+              yaxis: {
+                title: 'Words/Million'
+              },
+              xaxis: {
+                title: 'Year'
+              },
+              font: {
+                size: 8,  
+              },
+              autosize: false,
+              height: 100,
+              margin: {
+                l: 45,
+                r: 10,
+                b: 30,
+                t: 15,
+                pad: 10
+              }
+        }
+    };
+    
+    /* A query for bookworm, following the BW query language */
+    var searchOptions = {
+        "groups":["date_year"],
+        "counttype":"WordsPerMillion",
+        "database":"hathipd",
+        "search_limits":[{
+            "word": query.word,
+            "date_year": {"$gte":1750,"$lte":1923}
+            }],
+        "method":"return_json"
+    }
+
+    getBWData("http://bookworm.htrc.illinois.edu/cgi-bin/dbbindings.py",
+              searchOptions,
+              // This is the callback that runs when the data is ready
+              function(data, error) { 
+                plotTimeSeries(data, timeSeriesOptions ) 
+              }
+              );
+};
+
+plotSearchWidget();
+</script>
+</body>
+</html>
