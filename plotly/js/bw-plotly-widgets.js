@@ -37,7 +37,7 @@ var plotTimeSeries = function(bw_resp, options, callback) {
 
 }
 
-function getBWData(endpoint, query, callback) {
+function getBWData(endpoint, query, options, callback) {
     /*
     Make a bookworm query to API at location 'endpoint' and send response to
     callback(). Endpoint needs to have cross-domain headers if it is not on the same
@@ -46,7 +46,10 @@ function getBWData(endpoint, query, callback) {
     var query_string = JSON.stringify(query);
     var url = endpoint + "?query=" + query_string;
     Plotly.d3.json(url).get(function(error, data) {
-        if (error) return console.warn(error);
+        if (error) {
+          document.getElementById(options.div).innerHTML="<img src='Error.jpg' >";
+          return console.warn(error);
+        }
         callback(data, error);
     });
 };
