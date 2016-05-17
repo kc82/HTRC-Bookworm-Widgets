@@ -58,6 +58,7 @@ function plotSearchWidget() {
 
     getBWData("http://bookworm.htrc.illinois.edu/cgi-bin/dbbindings.py",
               searchOptions,
+              timeSeriesOptions,
               // This is the callback that runs when the data is ready
               function(data, error) { 
                 plotTimeSeries(data, timeSeriesOptions ) 
