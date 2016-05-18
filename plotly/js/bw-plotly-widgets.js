@@ -50,7 +50,7 @@ function getBWData(endpoint, query, options, callback) {
     Plotly.d3.json(url).get(function(error, data) {
         if (error) {
           //If the Bookworm API returns an error, show an error image
-          document.getElementById(options.div).innerHTML="<img src='Error.jpg' >";
+          document.getElementById(options.div).innerHTML="<img src='Error.jpg' height='100' width='700'>";
           return console.warn(error);
         }
         //console.log(data);
