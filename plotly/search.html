@@ -9,11 +9,15 @@
 <script type="text/javascript">
 function plotSearchWidget() {
 
-    /*var query = {
-        word: "Lincoln"
-    };*/
-    /*var parsedQuery = getJsonFromUrl(window.location.href);*/
+    //Case I: When the query word is the URL of the current page
+    //var parsedQuery = getJsonFromUrl(window.location.href);*/
+    
+    //Case II: When the query word is Lincoln
     var parsedQuery = getJsonFromUrl("https://analytics.hathitrust.org/blacklight/catalog?utf8=%E2%9C%93&q=Lincoln");
+    
+    //Case III: When the query word is ㄲㄲ (The value of each point is zero)
+    //var parsedQuery = getJsonFromUrl("https://analytics.hathitrust.org/blacklight/catalog?utf8=%E2%9C%93&q=ㄲㄲ");
+
     var query = new Object();
     query.word = parsedQuery.q;
     
