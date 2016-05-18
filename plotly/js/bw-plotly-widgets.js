@@ -45,14 +45,19 @@ function getBWData(endpoint, query, options, callback) {
     */
     var query_string = JSON.stringify(query);
     var url = endpoint + "?query=" + query_string;
+    //console.log(url);
+    
     Plotly.d3.json(url).get(function(error, data) {
         if (error) {
+          //If the Bookworm API returns an error, show an error image
           document.getElementById(options.div).innerHTML="<img src='Error.jpg' >";
           return console.warn(error);
         }
+        //console.log(data);
         callback(data, error);
     });
 };
+
 function getJsonFromUrl(query) {
   /*var query = location.search.substr(1); */
   var result = {};
